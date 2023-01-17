@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>main</title>
+<th:block layout:fragment="css">
+	<style>
+		.home-btn {
+			display: block;
+			text-align: center;
+			margin: 40px 0;
+			margin-top: 80px;
+			text-decoration: none;
+			font-size: 2.4rem;
+			font-weight: bold;
+			color: black;
+		}
+		
+		.home-btn:hover {
+			text-decoration: underline;
+		}
+		.wrap {
+			width: 500px;
+			min-height: 400px;
+			margin: 0 auto;
+			margin-top: 80px;
+			border: 1px solid black;
+			border-radius: 16px;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 44px;
+		}
+		
+		.wrap button {
+			width: 75%;
+			height: 64px;
+			background: transparent;
+			border: 1px solid black;
+			border-radius: 8px;
+			font-size: 1.25rem;
+			font-weight: 500;
+			cursor: pointer;
+		}
+		
+		.wrap button:hover {
+			background: black;
+			color: white;
+		}
+	</style>
+</th:block>
+</head>
+<body>
+	<a class="home-btn" href="/">Home</a>
+	<div class="wrap">
+		<button onclick="location.href='/members/login';">login</button>
+		<button onclick="location.href='/members/signup';">sign up</button>
+	</div>
+</body>
+</html>
