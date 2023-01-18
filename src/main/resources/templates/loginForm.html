@@ -55,7 +55,11 @@
 			box-sizing: border-box;
 		}
 		
-		.form__row:last-child {
+		.error-msg {
+			color: red;
+		}
+		
+		.form__row:last-of-type {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-around;
@@ -85,16 +89,18 @@
 		<form id="loginFrm" class="form" action="/members/login" method="post">
 			<p class="form__row">
 				<label class="form__label">Email</label>
-				<input class="form__input" type="email" placeholder="Enter email..." >
+				<input class="form__input" type="email" name="username" placeholder="Enter email..." >
 			</p>
 			<p class="form__row">
 				<label class="form__label">Password</label>
-				<input class="form__input" type="password" placeholder="Enter password..." >
+				<input class="form__input" type="password" name="password" placeholder="Enter password..." >
 			</p>
+			<p class="error-msg" th:if="${errorMsg != null}">※[[${errorMsg}]]※</p>
 			<p class="form__row">
 				<button type="button" class="form__btn" onclick="location.href='/members/signup';">sign up</button>
 				<button type="submit" class="form__btn">login</button>
 			</p>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 		</form>
 	</div>
 </body>

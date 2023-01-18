@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>main</title>
@@ -55,8 +55,13 @@
 <body>
 	<a class="home-btn" href="/">Home</a>
 	<div class="wrap">
-		<button onclick="location.href='/members/login';">login</button>
-		<button onclick="location.href='/members/signup';">sign up</button>
+		<th:block sec:authorize="isAnonymous()">
+			<button onclick="location.href='/members/login';">login</button>
+			<button onclick="location.href='/members/signup';">sign up</button>
+		</th:block>
+		<th:block sec:authorize="isAuthenticated()">
+			<button onclick="location.href='/members/logout';">logout</button>
+		</th:block>
 	</div>
 </body>
 </html>

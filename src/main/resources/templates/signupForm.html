@@ -55,8 +55,13 @@
 			padding: 8px;
 			box-sizing: border-box;
 		}
+
+		.error-msg {
+			color: red;
+			width: 80%;
+		}
 		
-		.form__row:last-child {
+		.form__row:last-of-type {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-around;
@@ -85,27 +90,36 @@
 <body>
 	<a class="home-btn" href="/">Home</a>
 	<div class="wrap">
-		<form id="signupFrm" class="form" th:action="@{/members/signup}" method="post" th:object=${memberFormDto}>
+		<form id="signupFrm" class="form" action="/members/signup" method="post" th:object=${memberFormDto}>
 			<p class="form__row">
 				<label class="form__label" th:for="name">Name</label>
 				<input class="form__input" th:field="*{name}" type="text" placeholder="Enter name..." >
 			</p>
+			<span class="error-msg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
 			<p class="form__row">
 				<label class="form__label" th:for="email">Email</label>
 				<input class="form__input" th:field="*{email}" type="email" placeholder="Enter email..." >
 			</p>
+			<span class="error-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
 			<p class="form__row">
 				<label class="form__label" th:for="password">Password</label>
 				<input class="form__input" th:field="*{password}" type="password" placeholder="Enter password..." >
 			</p>
+			<span class="error-msg" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
 			<p class="form__row">
 				<label class="form__label" th:for="address">Address</label>
 				<input class="form__input" th:field="*{address}" type="text" placeholder="Enter address..." >
 			</p>
+			<span class="error-msg" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+
 			<p class="form__row">
 				<button type="button" class="form__btn" onclick="location.href='/members/login';">login</button>
 				<button class="form__btn" type="submit">sign up</button>
 			</p>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 		</form>
 	</div>
 </body>

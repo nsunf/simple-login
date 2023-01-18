@@ -2,7 +2,10 @@ package com.simpleLogin.entity;
 
 import javax.persistence.*;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.simpleLogin.constant.Role;
+import com.simpleLogin.dto.MemberFormDto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,4 +33,14 @@ public class Member {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
+	public static Member createMember(MemberFormDto dto, PasswordEncoder pwdEncoder) {
+		Member member = new Member();
+		member.setName(dto.getName());
+		member.setEmail(dto.getEmail());
+		member.setPassword(pwdEncoder.encode(dto.getPassword()));
+		member.setAddress(dto.getAddress());
+		member.setRole(Role.USER);
+		
+		return member;
+	}
 }
